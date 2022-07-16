@@ -1,5 +1,6 @@
 package br.com.letscode.caixaeletronico.services;
 
+import br.com.letscode.caixaeletronico.model.Conta;
 import br.com.letscode.caixaeletronico.repository.MemoriaContaRepository;
 
 import java.util.Scanner;
@@ -9,12 +10,14 @@ public class ExecutaComandoEspecificoImpl implements ExecutaComandoEspecico{
     private final Deposito deposito;
     private final Saque saque;
     private final AbrirConta abrirConta;
+    private final Transferencia transferencia;
 
     public ExecutaComandoEspecificoImpl() {
         MemoriaContaRepository repository = new MemoriaContaRepository();
         this.deposito = new DepositoImpl();
         this.saque = new SaqueImpl();
         this.abrirConta = new AbrirContaImpl(repository);
+        this.transferencia = new TransferenciaImpl();
 
     }
 @Override
@@ -37,8 +40,15 @@ public class ExecutaComandoEspecificoImpl implements ExecutaComandoEspecico{
         System.out.println("Você realizou um depósito!");
     } else if (comando == 3) {
         abrirConta.execute();
-    }else {
-        System.out.println("Comando inválido!");
+    }    else if (comando == 4) {
+        System.out.println("Digite o número o valor do deposito: ");
+        double valor = entrada.nextDouble();
+        System.out.println("Digite o número a conta favorecida: ");
+        Conta favorecido = entrada.nextInt();
+        System.out.println("Digite o número a conta origem: ");
+        Conta origem = entrada.nextInt();
+        transferencia.transferir(valor, favorecido, origem);
+    }else {        System.out.println("Comando inválido!");
     }
     return resultado;
     }
