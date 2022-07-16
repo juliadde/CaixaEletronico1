@@ -41,12 +41,13 @@ public class ExecutaComandoEspecificoImpl implements ExecutaComandoEspecico{
     } else if (comando == 3) {
         abrirConta.execute();
     }    else if (comando == 4) {
-        System.out.println("Digite o número o valor do deposito: ");
+        System.out.println("Digite o número o valor da transferencia: ");
         double valor = entrada.nextDouble();
         System.out.println("Digite o número a conta favorecida: ");
-        Conta favorecido = entrada.nextInt();
+        int favorecido = entrada.nextInt();
         System.out.println("Digite o número a conta origem: ");
-        Conta origem = entrada.nextInt();
+        int origem = entrada.nextInt();
+        System.out.println("Você transferiu " + valor + " para a conta: " + favorecido + " com sucesso!");
         transferencia.transferir(valor, favorecido, origem);
     }else {        System.out.println("Comando inválido!");
     }
